@@ -42,12 +42,6 @@ Dataset yang digunakan dalam proyek ini adalah **Personal Protective Equipment (
 
 **Sumber dataset:** [Personal Protective Equipment (PPE) – Roboflow Universe](https://universe.roboflow.com/roboflow-universe-projects/personal-protective-equipment-combined-model/dataset/8)
 
-### Pembagian Dataset (Data Split)
-
-Dataset yang kami gunakan sudah dibagi dari sumbernya menjadi tiga bagian, yaitu **train**, **valid**, dan **test**. Jadi, pada proyek ini kami tidak melakukan proses pembagian dataset atau membagi ulang gambar ke dalam ketiga bagian tersebut.
-
-Kami hanya **mengkalkulasikan atau menghitung jumlah gambar** yang terdapat pada masing-masing folder train, valid, dan test. Penghitungan ini dilakukan untuk mengetahui jumlah data pada setiap bagian. Setelah proses data cleaning, jumlah gambar juga diperiksa dan dihitung kembali untuk mengetahui jumlah data yang tersisa dan memastikan dataset siap digunakan untuk proses pelatihan, validasi, dan pengujian model.
-
 ## MODEL YANG DIGUNAKAN
 
 Model yang digunakan dalam proyek ini adalah **YOLO11n (You Only Look Once versi 11 Nano)** yang dikembangkan oleh Ultralytics. YOLO11n merupakan model kecerdasan buatan yang digunakan untuk mengenali dan mendeteksi objek secara otomatis pada gambar maupun video. Model ini dapat menemukan objek sekaligus memperkirakan letaknya menggunakan *bounding box*.
@@ -215,8 +209,14 @@ print('Duplikat dengan anotasi berbeda:', duplikat_label_berbeda)
 print('Label kosong yang dipertahankan:', label_kosong)
 ```
 
-### 3.4 Pemeriksaan Jumlah Data dan Penyusunan Konfigurasi Dataset
+### 3.4 Pemeriksaan Jumlah Data dan Penyusunan Konfigurasi Dataset 
 
+### Pembagian Dataset (Data Split)
+
+Dataset yang kami gunakan sudah dibagi dari sumbernya menjadi tiga bagian, yaitu **train**, **valid**, dan **test**. Jadi, pada proyek ini kami tidak melakukan proses pembagian dataset atau membagi ulang gambar ke dalam ketiga bagian tersebut.
+
+Kami hanya **mengkalkulasikan atau menghitung jumlah gambar** yang terdapat pada masing-masing folder train, valid, dan test. Penghitungan ini dilakukan untuk mengetahui jumlah data pada setiap bagian. Setelah proses data cleaning, jumlah gambar juga diperiksa dan dihitung kembali untuk mengetahui jumlah data yang tersisa dan memastikan dataset siap digunakan untuk proses pelatihan, validasi, dan pengujian model.
+ 
 Setelah pembersihan, sistem memeriksa jumlah data pada setiap bagian dataset untuk memastikan data yang tersedia memenuhi persyaratan minimum pada notebook. Selanjutnya, file konfigurasi dataset disusun kembali dengan mengacu pada struktur dataset bersih sehingga lokasi data dan informasi kelas dapat dibaca dengan benar oleh YOLO11n.
 
 ```python
