@@ -14,8 +14,6 @@
 - I Made Suardhita Kusuma (2501010075)
 - Putri Rahmawati Ambarwangi (2501010059)
 
-**November 2026**
-
 ---
 
 ## 1. LATAR BELAKANG
@@ -28,7 +26,7 @@ Pada proyek ini, model yang digunakan adalah You Only Look Once versi 11 Nano (Y
 
 ## 2. RUMUSAN MASALAH
 
-- 2.1  Bagaimana proses pengolahan dan persiapan dataset APD/PPE, mulai dari pemeriksaan jumlah data, pembersihan data (data cleaning), hingga pembagian dataset menjadi data training, validation, dan testing?
+- 2.1  Bagaimana proses pengolahan dan persiapan dataset APD/PPE, mulai dari pemeriksaan struktur dan penghitungan jumlah data, pembersihan data (data cleaning), hingga pengecekan kembali data train, validation, dan test?
 
 - 2.2  Bagaimana penerapan metode Deep Learning menggunakan model YOLO11 Nano untuk mendeteksi dan mengidentifikasi berbagai jenis APD/PPE pada gambar?
 
@@ -37,6 +35,30 @@ Pada proyek ini, model yang digunakan adalah You Only Look Once versi 11 Nano (Y
 - 2.4  Bagaimana performa model YOLO11 Nano berdasarkan metrik Precision, Recall, mAP50, mAP50–95, serta Confusion Matrix?
 
 - 2.5  Bagaimana kemampuan model YOLO11 Nano dalam mendeteksi penggunaan maupun ketidakgunaan APD melalui pengujian dengan gambar dari dataset dan gambar baru di luar dataset?
+
+## DATASET
+
+Dataset yang digunakan dalam proyek ini adalah **Personal Protective Equipment (PPE)** yang diperoleh dari Roboflow Universe. Dataset ini berisi gambar dan anotasi objek APD yang digunakan sebagai data untuk proses pelatihan, validasi, dan pengujian model YOLO11n.
+
+**Sumber dataset:** [Personal Protective Equipment (PPE) – Roboflow Universe](https://universe.roboflow.com/roboflow-universe-projects/personal-protective-equipment-combined-model/dataset/8)
+
+### Pembagian Dataset (Data Split)
+
+Dataset yang kami gunakan sudah dibagi dari sumbernya menjadi tiga bagian, yaitu **train**, **valid**, dan **test**. Jadi, pada proyek ini kami tidak melakukan proses pembagian dataset atau membagi ulang gambar ke dalam ketiga bagian tersebut.
+
+Kami hanya **mengkalkulasikan atau menghitung jumlah gambar** yang terdapat pada masing-masing folder train, valid, dan test. Penghitungan ini dilakukan untuk mengetahui jumlah data pada setiap bagian. Setelah proses data cleaning, jumlah gambar juga diperiksa dan dihitung kembali untuk mengetahui jumlah data yang tersisa dan memastikan dataset siap digunakan untuk proses pelatihan, validasi, dan pengujian model.
+
+## MODEL YANG DIGUNAKAN
+
+Model yang digunakan dalam proyek ini adalah **YOLO11n (You Only Look Once versi 11 Nano)** yang dikembangkan oleh Ultralytics. YOLO11n merupakan model kecerdasan buatan yang digunakan untuk mengenali dan mendeteksi objek secara otomatis pada gambar maupun video. Model ini dapat menemukan objek sekaligus memperkirakan letaknya menggunakan *bounding box*.
+
+Versi Nano dirancang dengan ukuran model yang relatif ringan agar proses deteksi dapat berjalan dengan cepat dan efisien. Dalam proyek ini, YOLO11n digunakan untuk mendeteksi berbagai kategori objek Alat Pelindung Diri (APD/PPE) berdasarkan gambar pada dataset yang telah disiapkan.
+
+## METODE YANG DIGUNAKAN
+
+Metode yang digunakan dalam proyek ini adalah **Deep Learning**. Deep Learning merupakan bagian dari *machine learning* yang menggunakan jaringan saraf tiruan dengan banyak lapisan untuk mempelajari pola dan ciri-ciri dari data secara otomatis.
+
+Pada proyek ini, metode Deep Learning diterapkan untuk melatih model YOLO11n menggunakan gambar dan anotasi dari dataset PPE. Melalui proses pelatihan, model mempelajari ciri visual dari setiap kategori APD sehingga nantinya dapat mengenali objek dan menentukan lokasinya pada gambar atau video yang diuji.
 
 ## 3. TAHAPAN PENGERJAAN PROYEK
 
