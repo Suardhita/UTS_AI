@@ -481,3 +481,60 @@ for nama_file, isi_file in gambar_upload.items():
 ```
 
 Jalankan sel secara berurutan di Google Colab. Sesuaikan path file ZIP di Google Drive dan pastikan runtime GPU aktif. Hasil pelatihan dan evaluasi dalam laporan tidak boleh dianggap sudah tersedia hanya karena kode ditampilkan; hasil sebenarnya harus diperoleh dengan menjalankan notebook.
+
+## 4. HASIL DAN PEMBAHASAN EVALUASI MODEL
+
+Evaluasi dilakukan menggunakan bobot model terbaik (best.pt) pada data testing yang tidak digunakan untuk memperbarui bobot selama proses pelatihan. Pengujian menghasilkan nilai Precision sebesar 73,37%, Recall sebesar 78,99%, mAP50 sebesar 78,35%, dan mAP50-95 sebesar 50,24%. Selain itu, F1 rata-rata kelas yang diperoleh adalah 75,28%. Nilai-nilai tersebut digunakan untuk melihat ketepatan prediksi, kemampuan menemukan objek, serta kualitas deteksi pada beberapa tingkat IoU.
+
+### 4.1	Analisis Grafik Training dan Validation Loss
+
+Grafik Box Loss menunjukkan penurunan loss training dari sekitar 1,70 menjadi 1,26, sedangkan validation loss turun hingga sekitar 1,35. Penurunan ini menunjukkan bahwa model semakin baik dalam memperkirakan posisi bounding box. Pada bagian akhir grafik, validation loss cenderung mendatar sementara training loss masih menurun.
+
+<img width="900" height="444" alt="image" src="https://github.com/user-attachments/assets/6571dec7-4fab-4396-9683-86e61f23219a" />
+
+Pada grafik Classification Loss, nilai training dan validation loss sama-sama mengalami penurunan secara bertahap. Training loss berakhir sekitar 0,78 dan validation loss sekitar 0,75. Pola tersebut menunjukkan bahwa kemampuan model dalam mengklasifikasikan objek semakin baik selama proses pelatihan.
+
+<img width="900" height="444" alt="image" src="https://github.com/user-attachments/assets/578df42b-c142-40f4-8731-df41f765159f" />
+
+ Grafik Distribution Focal Loss (DFL) juga memperlihatkan tren penurunan. Nilai training loss turun hingga sekitar 1,19 dan validation loss berada di sekitar 1,20. Kedua kurva memiliki pola yang berdekatan, sehingga proses pembelajaran untuk memperkirakan batas objek menunjukkan perkembangan yang cukup konsisten.
+    
+ <img width="900" height="445" alt="image" src="https://github.com/user-attachments/assets/644df0d5-654e-4a55-9647-0660850763e9" />
+
+Secara keseluruhan, ketiga grafik loss memperlihatkan penurunan dari awal hingga akhir epoch yang ditampilkan. Hal ini menandakan bahwa model mempelajari pola data secara bertahap. Jarak antara kurva training dan validation pada sebagian besar grafik tidak menunjukkan perbedaan yang sangat besar, meskipun validation Box Loss mulai mendatar pada bagian akhir.
+
+###	4.2 Perkembangan Metrik Validasi
+
+Grafik perkembangan metrik memperlihatkan bahwa Precision, Recall, mAP50, dan mAP50-95 cenderung meningkat selama pelatihan. Precision mengalami beberapa perubahan pada epoch awal dan kemudian berada di kisaran 0,7. Recall dan mAP50 meningkat secara bertahap hingga mendekati 0,8. Sementara itu, mAP50-95 meningkat lebih perlahan dan berakhir di sekitar 0,5. Perbedaan ini menunjukkan bahwa deteksi pada ambang IoU 0,50 lebih baik dibandingkan penilaian rata-rata pada rentang IoU 0,50 sampai 0,95.
+
+<img width="901" height="444" alt="image" src="https://github.com/user-attachments/assets/a822870a-5194-4b31-8eea-117c9f0cc22a" />
+
+### 4.3	Perkembangan Metrik Validasi
+
+Berdasarkan pengujian pada data test, model memperoleh Precision 0,7337, Recall 0,7899, mAP50 0,7835, dan mAP50-95 0,5024. Precision sebesar 73,37% menunjukkan ketepatan prediksi objek yang dihasilkan model. Recall sebesar 78,99% menunjukkan kemampuan model dalam menemukan objek yang terdapat pada data pengujian. Nilai mAP50 sebesar 78,35% menggambarkan performa deteksi pada IoU 0,50, sedangkan mAP50-95 sebesar 50,24% merupakan rata-rata mAP pada rentang IoU 0,50 hingga 0,95.
+
+<img width="900" height="444" alt="image" src="https://github.com/user-attachments/assets/b2f8132f-b199-4a54-8f3f-e107224b658b" />
+
+F1 rata-rata kelas yang diperoleh adalah 75,28%. F1 merupakan ukuran gabungan antara Precision dan Recall. Nilai Precision, Recall, dan F1 mengikuti titik confidence yang dipilih oleh evaluator. Oleh karena itu, nilai mAP tidak disebut sebagai accuracy karena mAP merupakan metrik evaluasi deteksi objek yang berbeda. 
+
+<img width="870" height="287" alt="image" src="https://github.com/user-attachments/assets/f50e2785-d4a9-41d2-a981-8a91434dddb3" />
+
+### 4.4	Evaluasi Per Kelas
+
+Hasil evaluasi per kelas menunjukkan bahwa performa model berbeda-beda pada setiap kategori. Kelas Ladder memperoleh mAP50 sebesar 0,970 dan mAP50-95 sebesar 0,826, sedangkan kelas Person memperoleh Precision 0,925 dan mAP50 sebesar 0,964. Hasil ini menunjukkan bahwa model memiliki performa yang baik pada kedua kelas tersebut.
+Di sisi lain, kelas NO-Safety Vest memperoleh Recall 0,156, mAP50 0,157, dan mAP50-95 0,087. Nilai tersebut merupakan salah satu hasil terendah pada tabel, sehingga kelas ini masih sulit dikenali oleh model. Kelas Mask dan NO-Mask juga memiliki nilai mAP50-95 yang relatif rendah, yaitu 0,322 dan 0,361. Hasil tersebut menunjukkan bahwa beberapa kelas masih memerlukan perhatian lebih pada proses pengembangan dataset dan pelatihan.
+
+<img width="615" height="677" alt="image" src="https://github.com/user-attachments/assets/98f9b894-59bc-4c7f-a449-9903e48eeb29" />
+
+### 4.5	Analisis Confusion Matrix
+
+Confusion Matrix digunakan untuk melihat kesesuaian antara kelas sebenarnya dan kelas hasil prediksi model. Nilai pada bagian diagonal menunjukkan prediksi yang sesuai dengan kelas sebenarnya, sedangkan nilai di luar diagonal menunjukkan adanya kesalahan klasifikasi atau pertukaran prediksi antar kelas. Pada gambar, beberapa kelas seperti Gloves, Goggles, Hardhat, Person, dan Safety Vest memperlihatkan nilai diagonal yang cukup menonjol.
+
+<img width="900" height="675" alt="image" src="https://github.com/user-attachments/assets/38bc6fb0-2a42-4ba8-acbd-ca3361515ad8" />
+
+Confusion Matrix Normalized menampilkan nilai dalam bentuk proporsi sehingga perbandingan antar kelas lebih mudah diamati meskipun jumlah data setiap kelas berbeda. Terlihat bahwa sebagian besar kelas memiliki nilai diagonal yang tinggi. Namun, masih terdapat kesalahan pada beberapa kategori, terutama hubungan antara Mask, NO-Mask, dan NO-Hardhat. Hal ini menunjukkan bahwa model masih dapat tertukar ketika objek memiliki karakteristik visual yang mirip atau sulit dibedakan.
+
+<img width="900" height="675" alt="image" src="https://github.com/user-attachments/assets/528a11d4-ee2e-4c73-8846-0a6495ffa50d" />
+
+### 4.6 Kesimpulan Evaluasi 
+
+Berdasarkan hasil pengujian, model YOLO11n telah mampu mendeteksi berbagai kategori APD/PPE dengan hasil Precision 73,37%, Recall 78,99%, mAP50 78,35%, mAP50-95 50,24%, dan F1 rata-rata kelas 75,28%. Grafik loss yang menurun serta perkembangan metrik yang cenderung meningkat menunjukkan bahwa proses pelatihan berjalan dengan baik. Hasil per kelas memperlihatkan bahwa beberapa kategori, seperti Ladder dan Person, dapat dideteksi dengan baik, sedangkan NO-Safety Vest, Mask, dan NO-Mask masih membutuhkan peningkatan. Dengan demikian, model sudah menunjukkan kemampuan deteksi yang cukup baik, tetapi belum memiliki performa yang merata pada seluruh kelas.
