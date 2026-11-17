@@ -13,7 +13,9 @@
 - I Nyoman Budiarta (2501010074)
 - I Made Suardhita Kusuma (2501010075)
 - Putri Rahmawati Ambarwangi (2501010059)
-
+---
+Link Collab :
+https://colab.research.google.com/drive/1dGVxq5EIxDzgdAXjSjimwhUstaSUQJVa?usp=sharing
 ---
 
 ## 1. LATAR BELAKANG
